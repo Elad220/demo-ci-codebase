@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    env: # Or as an environment variable
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag "$dockerhub_username/kub-tasks-api"
+        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        docker push "$dockerhub_username/kub-tasks-api"
