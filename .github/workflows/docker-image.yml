@@ -21,4 +21,5 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag "$dockerhub_username/kub-tasks-api"
+        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         docker push "$dockerhub_username/kub-tasks-api"
