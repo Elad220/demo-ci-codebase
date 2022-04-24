@@ -28,7 +28,7 @@ app.get('/token/:hashedPassword/:enteredPassword', (req, res) => {
 });
 
 app.get('/hashed-password/:password', (req, res) => {
-  // dummy hashed pw generation!
+  // dummy hashed pw generation
   const enteredPassword = req.params.password;
   const hashedPassword = enteredPassword + '_hash';
   res.status(200).json({ hashedPassword: hashedPassword });
