@@ -24,14 +24,14 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        cd tasks-app/
+        cd $folder_name/
         git_hash=$(git rev-parse --short "$GITHUB_SHA")
         docker build . --file Dockerfile --tag "$dockerhub_username/$repo_name:$git_hash"
         echo $dockerhub_password | docker login -u $dockerhub_username --password-stdin
         docker push "$dockerhub_username/$repo_name:$git_hash"
     - name: Update Version
       run: |
-          cd tasks-app/
+          cd $folder_name/kubernetes/
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           version=$(cat ./tasks-deployment.yaml | grep image | awk '{print $2}')
           sed -i "s|$version|$dockerhub_username/$repo_name:$git_hash|g" ./tasks-deployment.yaml
