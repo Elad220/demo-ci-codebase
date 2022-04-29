@@ -5,8 +5,6 @@ on:
     branches: [ main ]
     paths:
       - "tasks-app/tasks-app.js"
-  # pull_request:
-  #   branches: [ main ]
 
 jobs:
 
@@ -14,7 +12,7 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    env: # Or as an environment variable
+    env:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
       repo_name: "kub-tasks-api"
@@ -35,6 +33,7 @@ jobs:
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           version=$(cat ./tasks-deployment.yaml | grep image | awk '{print $2}')
           sed -i "s|$version|$dockerhub_username/$repo_name:$git_hash|g" ./tasks-deployment.yaml
+
     - name: Add & Commit
       uses: EndBug/add-and-commit@v9.0.0
       with:
