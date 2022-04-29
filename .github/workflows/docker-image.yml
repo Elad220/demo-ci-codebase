@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "**.js"
+      - "/tasks-app/auth-app.js"
   # pull_request:
   #   branches: [ main ]
 
@@ -18,20 +18,21 @@ jobs:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
       repo_name: "kub-tasks-api"
+      folder_name: "tasks-app"
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
         git_hash=$(git rev-parse --short "$GITHUB_SHA")
-        docker build . --file Dockerfile --tag "$dockerhub_username/$repo_name:$git_hash"
+        docker build ./$folder_name --file Dockerfile --tag "$dockerhub_username/$repo_name:$git_hash"
         echo $dockerhub_password | docker login -u $dockerhub_username --password-stdin
         docker push "$dockerhub_username/$repo_name:$git_hash"
     - name: Update Version
       run: |
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
-          version=$(cat ./tasks-deployment.yaml | grep image | awk '{print $2}')
-          sed -i "s|$version|$dockerhub_username/$repo_name:$git_hash|g" ./tasks-deployment.yaml
+          version=$(cat .$folder_name/tasks-deployment.yaml | grep image | awk '{print $2}')
+          sed -i "s|$version|$dockerhub_username/$repo_name:$git_hash|g" .$folder_name/tasks-deployment.yaml
     - name: Add & Commit
       uses: EndBug/add-and-commit@v9.0.0
       with:
