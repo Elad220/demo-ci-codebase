@@ -19,7 +19,7 @@ app.get('/token/:hashedPassword/:enteredPassword', (req, res) => {
   const hashedPassword = req.params.hashedPassword;
   const enteredPassword = req.params.enteredPassword;
 
-  // dummy password verification
+  // dummy password verification!
   if (hashedPassword === enteredPassword + '_hash') {
     const token = 'abc';
     return res.status(200).json({ message: 'Token created.', token: token });
