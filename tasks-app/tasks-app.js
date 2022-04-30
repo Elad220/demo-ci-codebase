@@ -38,7 +38,7 @@ app.get('/tasks', async (req, res) => {
       }
       const strData = data.toString();
       const entries = strData.split('TASK_SPLIT');
-      entries.pop(); // remove last, empty entry
+      entries.pop(); // remove last, empty entr
       console.log(entries);
       const tasks = entries.map((json) => JSON.parse(json));
       res.status(200).json({ message: 'Tasks loaded.', tasks: tasks });
