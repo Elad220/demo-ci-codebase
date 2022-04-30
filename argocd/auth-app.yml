@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: users-app
+  name: auth-app
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -11,6 +11,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd/users-app
-    repoURL: https://gitlab.com/ayush-sharma/example-assets.git
+    path: auth-api/kubernetes
+    repoURL: https://github.com/Elad220/demo-ci-codebase.git
     targetRevision: HEAD
