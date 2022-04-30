@@ -27,7 +27,7 @@ const extractAndVerifyToken = async (headers) => {
   const response = await axios.get(`http://${process.env.AUTH_ADDRESS}/verify-token/` + token);
   return response.data.uid;
 };
-//
+
 app.get('/tasks', async (req, res) => {
   try {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uidd
