@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: auth
-          image: elad2050/kub-auth:latest
+          image: elad2050/kub-auth:542d5e5
