@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: users
-          image: elad2050/kub-users:latest
+          image: elad2050/kub-users:2026c0d
           env:
             - name: AUTH_ADDRESS
               # value: "10.99.104.252"
