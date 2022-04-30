@@ -30,7 +30,7 @@ const extractAndVerifyToken = async (headers) => {
 
 app.get('/tasks', async (req, res) => {
   try {
-    const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
+    const uid = await extractAndVerifyToken(req.headers); // we don't really need the uidd
     fs.readFile(filePath, (err, data) => {
       if (err) {
         console.log(err);
