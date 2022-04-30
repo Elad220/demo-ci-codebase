@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: elad2050/kub-frontend:latest
+          image: elad2050/kub-frontend:542d5e5
