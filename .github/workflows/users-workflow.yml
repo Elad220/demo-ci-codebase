@@ -33,6 +33,7 @@ jobs:
           cd $folder_name/kubernetes/
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           version=$(cat ./$deployment_name | grep image | awk '{print $2}')
+          git pull '--rebase'
           sed -i "s|$version|$dockerhub_username/$repo_name:$git_hash|g" ./$deployment_name
 
     - name: Add & Commit
@@ -40,4 +41,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         commit_message: Version updated
-        pull: '--rebase'
