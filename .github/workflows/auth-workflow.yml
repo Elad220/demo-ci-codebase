@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "tasks-app/tasks-app.js"
+      - "auth-api/auth-app.js"
 
 jobs:
 
@@ -15,9 +15,9 @@ jobs:
     env:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      repo_name: "kub-tasks-api"
-      folder_name: "tasks-app"
-      deployment_name: "tasks-deployment.yaml"
+      repo_name: "kub-auth"
+      folder_name: "auth-api"
+      deployment_name: "auth-deployment.yaml"
 
     steps:
     - uses: actions/checkout@v3

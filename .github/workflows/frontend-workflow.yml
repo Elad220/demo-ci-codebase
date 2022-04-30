@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "tasks-app/tasks-app.js"
+      - "frontend/src/**"
 
 jobs:
 
@@ -15,9 +15,9 @@ jobs:
     env:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      repo_name: "kub-tasks-api"
-      folder_name: "tasks-app"
-      deployment_name: "tasks-deployment.yaml"
+      repo_name: "kub-frontend"
+      folder_name: "frontend"
+      deployment_name: "frontend-deployment.yaml"
 
     steps:
     - uses: actions/checkout@v3
@@ -39,4 +39,4 @@ jobs:
       uses: EndBug/add-and-commit@v9.0.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        commit_message: Version updated
+        commit_message: Version updated - $folder_name
