@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tasks
-          image: elad2050/kub-tasks-api:f5463a3
+          image: elad2050/kub-tasks-api:ef0bcc6
           env:
             - name: AUTH_ADDRESS
               # value: "10.99.104.252"
