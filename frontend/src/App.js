@@ -27,7 +27,7 @@ function App() {
     },
     [fetchTasks]
   );
-
+//
   function addTaskHandler(task) {
     fetch('/api/tasks', {
       method: 'POST',
